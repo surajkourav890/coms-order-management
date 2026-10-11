@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f5f6f4" />
+    <meta name="description" content="Date-wise restaurant order log and revenue summary." />
+    <title>COMS | Sales &amp; Revenue Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="sales.css" />
+    <script src="config.js" defer></script>
+    <script src="data-service.js" defer></script>
+    <script src="sales.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="index.html" aria-label="COMS home">
+          <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+          <span class="brand-copy"><strong>coms<span>.</span></strong><small>ORDER MANAGEMENT</small></span>
+        </a>
+
+        <div class="topbar-center">
+          <span class="restaurant-icon" aria-hidden="true">⌂</span>
+          <div><strong>The Green Fork</strong><span>Restaurant workspace</span></div>
+          <span class="workspace-chevron" aria-hidden="true">⌄</span>
+        </div>
+
+        <nav class="topbar-nav" aria-label="Main navigation">
+          <a class="topbar-nav-link" href="index.html">New order</a>
+          <a class="topbar-nav-link is-active" href="sales.html" aria-current="page">Sales tracker</a>
+        </nav>
+
+        <div class="topbar-actions">
+          <span class="avatar" aria-label="Signed in as Alex Morgan">AM</span>
+        </div>
+      </header>
+
+      <main class="sales-workspace">
+        <section class="sales-heading" aria-labelledby="sales-title">
+          <div>
+            <div class="eyebrow"><span class="eyebrow-line"></span> COMS <span class="eyebrow-dot">/</span> BUSINESS OVERVIEW</div>
+            <h1 id="sales-title">Sales &amp; Revenue Tracker<span>.</span></h1>
+            <p>Every order, logged by date. Your sales at a glance.</p>
+          </div>
+          <div class="live-clock-card">
+            <span class="live-clock-icon" aria-hidden="true">◷</span>
+            <span><small>LOCAL DATE &amp; TIME</small><strong id="live-clock">—</strong></span>
+            <i aria-hidden="true"></i>
+          </div>
+        </section>
+
+        <section class="sales-log-panel" aria-labelledby="sales-log-title">
+          <div class="sales-log-heading">
+            <div><div class="section-kicker">ORDER REGISTER</div><h2 id="sales-log-title">Live orders <span class="live-dot" aria-hidden="true"></span></h2></div>
+            <div class="sales-log-actions"><span class="order-count" id="order-count">0 orders</span><button class="refresh-button" id="refresh-orders" type="button"><span aria-hidden="true">↻</span> Refresh</button></div>
+          </div>
+
+          <div class="sales-groups" id="sales-groups" aria-live="polite"></div>
+          <div class="sales-empty" id="sales-empty" hidden>
+            <div class="empty-ledger" aria-hidden="true">▤</div>
+            <strong>No orders recorded yet</strong>
+            <p>Orders placed from the order screen will appear here automatically.</p>
+            <a class="empty-cta" href="index.html">Create an order <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="sales-error" id="sales-error" role="alert" hidden></div>
+        </section>
+
+        <section class="revenue-section" aria-labelledby="revenue-title">
+          <div class="revenue-heading"><div><div class="section-kicker">REVENUE SUMMARY</div><h2 id="revenue-title">The bigger picture</h2></div><span class="summary-caption">Updates as orders come in</span></div>
+          <div class="revenue-grid">
+            <article class="revenue-card is-featured"><span class="revenue-card-label"><i></i> TODAY</span><strong id="metric-today">₹0.00</strong><small>Since 12:00 AM</small><span class="metric-spark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></article>
+            <article class="revenue-card"><span class="revenue-card-label">THIS WEEK</span><strong id="metric-week">₹0.00</strong><small>Starting Monday</small><span class="metric-symbol" aria-hidden="true">↗</span></article>
+            <article class="revenue-card"><span class="revenue-card-label">THIS MONTH</span><strong id="metric-month">₹0.00</strong><small id="month-caption">Month to date</small><span class="metric-symbol" aria-hidden="true">◷</span></article>
+            <article class="revenue-card"><span class="revenue-card-label">THIS YEAR</span><strong id="metric-year">₹0.00</strong><small id="year-caption">Year to date</small><span class="metric-symbol" aria-hidden="true">▥</span></article>
+          </div>
+        </section>
+
+        <footer class="sales-footer"><span>COMS <span class="footer-divider">/</span> SALES REGISTER</span><span id="last-updated">Last updated just now</span></footer>
+      </main>
+    </div>
+  </body>
+</html>

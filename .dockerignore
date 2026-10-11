@@ -1,0 +1,7 @@
+.git
+**/target/
+**/application-local.properties
+.env
+.env.*
+*.sql
+*.dump

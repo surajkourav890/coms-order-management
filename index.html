@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f5f6f4" />
+    <meta name="description" content="A clean restaurant order management workspace." />
+    <title>COMS | Order Management</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="config.js" defer></script>
+    <script src="data-service.js" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#main" aria-label="COMS home">
+          <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+          <span class="brand-copy"><strong>coms<span>.</span></strong><small>ORDER MANAGEMENT</small></span>
+        </a>
+
+        <div class="topbar-center">
+          <span class="restaurant-icon" aria-hidden="true">⌂</span>
+          <div><strong>The Green Fork</strong><span>Restaurant workspace</span></div>
+          <span class="workspace-chevron" aria-hidden="true">⌄</span>
+        </div>
+
+        <nav class="topbar-nav" aria-label="Main navigation">
+          <a class="topbar-nav-link is-active" href="index.html" aria-current="page">New order</a>
+          <a class="topbar-nav-link" href="sales.html">Sales tracker</a>
+        </nav>
+
+        <div class="topbar-actions">
+          <span class="avatar" aria-label="Signed in as Alex Morgan">AM</span>
+        </div>
+      </header>
+
+      <main id="main" class="workspace">
+        <section class="page-heading" aria-labelledby="page-title">
+          <div>
+            <div class="eyebrow"><span class="eyebrow-line"></span> SERVICE DESK <span class="eyebrow-dot">/</span> NEW ORDER</div>
+            <h1 id="page-title">Make it a good one<span>.</span></h1>
+            <p>Build an order, send it to the kitchen, and keep service moving.</p>
+          </div>
+        </section>
+
+        <section class="order-layout" aria-label="Create restaurant order">
+          <div class="menu-panel">
+            <div class="section-heading">
+              <div><div class="section-kicker">MADE FRESH TODAY</div><h2>Explore the menu</h2></div>
+              <span class="item-count" id="menu-count">Loading...</span>
+            </div>
+
+            <div class="menu-tools">
+              <div class="category-list" id="category-list" role="group" aria-label="Filter menu by category">
+                <button class="category-chip is-active" type="button" data-category="All" aria-pressed="true">All <span id="all-category-count">0</span></button>
+                <button class="category-chip" type="button" data-category="Starters" aria-pressed="false">Starters</button>
+                <button class="category-chip" type="button" data-category="Main course" aria-pressed="false">Main course</button>
+                <button class="category-chip" type="button" data-category="Drinks" aria-pressed="false">Drinks</button>
+                <button class="category-chip" type="button" data-category="Desserts" aria-pressed="false">Desserts</button>
+              </div>
+              <label class="search-box" for="menu-search">
+                <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.7" cy="8.7" r="5.7"></circle><path d="m13 13 4 4"></path></svg>
+                <input id="menu-search" type="search" placeholder="Find a dish..." autocomplete="off" />
+                <kbd>/</kbd>
+              </label>
+            </div>
+
+            <div class="menu-loading" id="menu-loading" role="status">Loading menu from the database...</div>
+            <div class="menu-load-error" id="menu-load-error" role="alert" hidden>
+              <strong>Menu could not be loaded</strong>
+              <p>Run Spring Boot at localhost:8080 and open COMS at localhost:5500. Avoid opening index.html directly as a file.</p>
+            </div>
+            <div class="menu-grid" id="menu-grid" aria-live="polite"></div>
+            <div class="no-results" id="no-results" hidden>
+              <span aria-hidden="true">⌕</span><strong>No dishes found</strong><p>Try a different name or category.</p>
+            </div>
+          </div>
+
+          <aside class="cart-panel" aria-labelledby="cart-title">
+            <div class="cart-heading">
+              <div><div class="section-kicker">YOUR SELECTION</div><h2 id="cart-title">Current order <span class="cart-count" id="cart-count">0</span></h2></div>
+              <button class="text-button" id="clear-cart" type="button" disabled>Clear all</button>
+            </div>
+
+            <div class="cart-table-label"><span class="mini-table-icon" aria-hidden="true">▦</span><select id="table-select" class="cart-table-select" aria-label="Select table"><option value="Table 01">Table 01</option><option value="Table 02">Table 02</option><option value="Table 03">Table 03</option><option value="Table 04" selected>Table 04</option><option value="Table 05">Table 05</option><option value="Table 06">Table 06</option><option value="Table 07">Table 07</option><option value="Table 08">Table 08</option><option value="Takeaway">Takeaway</option></select><span class="service-type" id="service-type">DINE IN</span></div>
+
+            <div class="cart-content" id="cart-content" aria-live="polite">
+              <div class="empty-cart" id="empty-cart">
+                <div class="empty-illustration" aria-hidden="true"><span>＋</span><i></i></div>
+                <strong>Your order starts here</strong>
+                <p>Add something delicious<br />from the menu.</p>
+              </div>
+              <ul class="cart-items" id="cart-items"></ul>
+            </div>
+
+            <div class="cart-footer">
+              <div class="totals-row"><span>Subtotal</span><span id="subtotal">₹0.00</span></div>
+              <div class="totals-row total-row"><strong>Total</strong><strong id="total">₹0.00</strong></div>
+              <button class="place-order-button" id="place-order" type="button" disabled>
+                <span>Place order</span><span class="button-total" id="button-total">₹0.00</span><span class="button-arrow" aria-hidden="true">→</span>
+              </button>
+              <p class="order-note"><span aria-hidden="true">♧</span> A little joy, coming right up.</p>
+            </div>
+          </aside>
+        </section>
+
+        <footer class="page-footer"><span>COMS <span class="footer-divider">/</span> SERVICE DESK</span><span>Good food. Thoughtful service.</span></footer>
+      </main>
+
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
+  </body>
+</html>
