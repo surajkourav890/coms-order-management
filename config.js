@@ -1,5 +1,4 @@
-// Local development uses Spring Boot on port 8080.
-// Before publishing the front end, replace this with the public HTTPS URL of the API.
+// Public API hosted on Render. Set this back to localhost:8080 for local backend development.
 window.COMS_CONFIG = Object.freeze({
-  apiBaseUrl: "http://localhost:8080",
+  apiBaseUrl: "https://coms-order-management.onrender.com",
 });
